@@ -1,7 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+import { Login } from './pages/login/Login';
+import { ChakraProvider } from '@chakra-ui/react';
+import { theme } from "./styles/theme"
+import { ColorModeScript } from '@chakra-ui/react'
+import { LightDarkModeToggle } from './components/LightDarkModeToggle';
+
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -9,7 +14,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <ChakraProvider theme = { theme }>
+    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+      <LightDarkModeToggle />
+      <Login />
+    </ChakraProvider>
   </React.StrictMode>
 );
 
