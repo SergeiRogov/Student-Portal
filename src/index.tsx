@@ -1,23 +1,44 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import { Login } from './pages/login/Login';
-import { ChakraProvider } from '@chakra-ui/react';
-import { theme } from "./styles/theme"
-import { ColorModeScript } from '@chakra-ui/react'
-import { LightDarkModeToggle } from './components/LightDarkModeToggle';
+import { ChakraProvider, ColorModeScript } from "@chakra-ui/react";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import { theme } from "./styles/theme";
 
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from "./reportWebVitals";
+
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Root } from "./components/Root";
+import { Register } from "./pages/registration/Register";
+import { Login } from "./pages/login/Login";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    children: [
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      }
+    ],
+    
+  },
+
+]);
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <ChakraProvider theme = { theme }>
-    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-      <LightDarkModeToggle />
-      <Login />
+    <ChakraProvider theme={theme}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+
+      <RouterProvider router={router} />
     </ChakraProvider>
   </React.StrictMode>
 );
