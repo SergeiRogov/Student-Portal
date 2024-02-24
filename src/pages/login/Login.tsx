@@ -5,7 +5,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  Link,
+  Link as ChakraLink,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -64,9 +64,9 @@ export function Login(props: ILoginProps) {
       </Flex>
 
       <Button variant="primary">Sign in</Button>
-      <Link mb={4} fontSize="15">
+      <ChakraLink as={ReactRouterLink} to="/forgot-password" mb={4} fontSize="15">
         forgot password
-      </Link>
+      </ChakraLink>
       <Text mb={4}>or</Text>
       <ReactRouterLink to="/register">
         <Button variant="primary">Create new account</Button>

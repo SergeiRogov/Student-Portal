@@ -8,13 +8,16 @@ import reportWebVitals from "./reportWebVitals";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./components/Root";
-import { Register } from "./pages/registration/Register";
+import ErrorPage from "./pages/error-page/ErrorPage";
 import { Login } from "./pages/login/Login";
+import { Register } from "./pages/registration/Register";
+import { ForgotPassword } from "./pages/forgot-password/ForgotPassword";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/login",
@@ -23,11 +26,13 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
-      }
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
+      },
     ],
-    
   },
-
 ]);
 
 const root = ReactDOM.createRoot(
@@ -37,7 +42,6 @@ root.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-
       <RouterProvider router={router} />
     </ChakraProvider>
   </React.StrictMode>
