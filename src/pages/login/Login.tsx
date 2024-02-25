@@ -65,7 +65,12 @@ export function Login() {
         <Button variant="primary">Sign in</Button>
       </ReactRouterLink>
 
-      <ChakraLink as={ReactRouterLink} to="/forgot-password" mb={4} fontSize="15">
+      <ChakraLink
+        as={ReactRouterLink}
+        to="/forgot-password"
+        mb={4}
+        fontSize="15"
+      >
         forgot password
       </ChakraLink>
 
@@ -74,7 +79,6 @@ export function Login() {
       <ReactRouterLink to="/register">
         <Button variant="primary">Create new account</Button>
       </ReactRouterLink>
-
     </Flex>
   );
 }

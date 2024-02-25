@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from "@chakra-ui/react"; 
+import { Box, Heading, Text } from "@chakra-ui/react";
 import { useRouteError } from "react-router-dom";
 
 export default function ErrorPage() {
