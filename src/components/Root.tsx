@@ -1,13 +1,11 @@
 import { Outlet } from "react-router-dom";
 import { LightDarkModeToggle } from "./LightDarkModeToggle";
 
-export interface IRootProps {}
-
-export function Root(props: IRootProps) {
+export const Root = () => {
   return (
     <>
       <LightDarkModeToggle />
       <Outlet />
     </>
   );
-}
+};

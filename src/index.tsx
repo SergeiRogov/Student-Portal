@@ -6,34 +6,32 @@ import { theme } from "./styles/theme";
 
 import reportWebVitals from "./reportWebVitals";
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+import { NavbarLayout } from "./components/NavbarLayout";
 import { Root } from "./components/Root";
+import { Courses } from "./pages/courses/Courses";
 import ErrorPage from "./pages/error-page/ErrorPage";
+import { ForgotPassword } from "./pages/forgot-password/ForgotPassword";
 import { Login } from "./pages/login/Login";
 import { Register } from "./pages/registration/Register";
-import { ForgotPassword } from "./pages/forgot-password/ForgotPassword";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Root />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "/login",
-        element: <Login />,
-      },
-      {
-        path: "/register",
-        element: <Register />,
-      },
-      {
-        path: "/forgot-password",
-        element: <ForgotPassword />,
-      },
-    ],
-  },
-]);
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
+      <Route element={<NavbarLayout />}>
+        <Route path="courses" element={<Courses />} />
+      </Route>
+      <Route path="/login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+      <Route path="forgot-password" element={<ForgotPassword />} />
+    </Route>
+  )
+);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

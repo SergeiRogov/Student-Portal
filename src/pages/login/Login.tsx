@@ -11,9 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
 
-export interface ILoginProps {}
-
-export function Login(props: ILoginProps) {
+export function Login() {
   return (
     <Flex
       flexDirection="column"
@@ -63,14 +61,20 @@ export function Login(props: ILoginProps) {
         </InputGroup>
       </Flex>
 
-      <Button variant="primary">Sign in</Button>
+      <ReactRouterLink to="/courses">
+        <Button variant="primary">Sign in</Button>
+      </ReactRouterLink>
+
       <ChakraLink as={ReactRouterLink} to="/forgot-password" mb={4} fontSize="15">
         forgot password
       </ChakraLink>
+
       <Text mb={4}>or</Text>
+
       <ReactRouterLink to="/register">
         <Button variant="primary">Create new account</Button>
       </ReactRouterLink>
+
     </Flex>
   );
 }
