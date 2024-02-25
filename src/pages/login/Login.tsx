@@ -61,7 +61,7 @@ export function Login() {
         </InputGroup>
       </Flex>
 
-      <ReactRouterLink to="/courses">
+      <ReactRouterLink to="/app/courses">
         <Button variant="primary">Sign in</Button>
       </ReactRouterLink>
 

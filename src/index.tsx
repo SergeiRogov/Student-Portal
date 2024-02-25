@@ -27,7 +27,7 @@ import { ShoppingCart } from "./pages/shopping-cart/ShoppingCart";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
-      <Route element={<NavbarLayout />}>
+      <Route path="app" element={<NavbarLayout />}>
         <Route path="courses">
           <Route index element={<Courses />} />
           <Route path=":id" element={<Course />} />
