@@ -31,7 +31,7 @@ const router = createBrowserRouter(
       <Route path="registration" element={<Registration />} />
       <Route path="forgot-password" element={<ForgotPassword />} />
 
-      <Route path="app" element={<NavbarLayout />}>
+      <Route element={<NavbarLayout />}>
         <Route path="courses">
           <Route index element={<Courses />} />
           <Route path=":id" element={<Course />} />
