@@ -20,13 +20,17 @@ import ErrorPage from "./pages/error-page/ErrorPage";
 import { ForgotPassword } from "./pages/forgot-password/ForgotPassword";
 import { History } from "./pages/history/History";
 import { Login } from "./pages/login/Login";
-import { Register } from "./pages/registration/Register";
+import { Registration } from "./pages/registration/Registration";
 import { Payment } from "./pages/shopping-cart/payment/Payment";
 import { ShoppingCart } from "./pages/shopping-cart/ShoppingCart";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
+      <Route path="login" element={<Login />} />
+      <Route path="registration" element={<Registration />} />
+      <Route path="forgot-password" element={<ForgotPassword />} />
+
       <Route path="app" element={<NavbarLayout />}>
         <Route path="courses">
           <Route index element={<Courses />} />
@@ -40,10 +44,6 @@ const router = createBrowserRouter(
 
         <Route path="history" element={<History />} />
       </Route>
-
-      <Route path="login" element={<Login />} />
-      <Route path="register" element={<Register />} />
-      <Route path="forgot-password" element={<ForgotPassword />} />
     </Route>
   )
 );

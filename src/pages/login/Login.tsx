@@ -76,7 +76,7 @@ export function Login() {
 
       <Text mb={4}>or</Text>
 
-      <ReactRouterLink to="/register">
+      <ReactRouterLink to="/registration">
         <Button variant="primary">Create new account</Button>
       </ReactRouterLink>
     </Flex>
