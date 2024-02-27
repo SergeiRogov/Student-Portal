@@ -12,7 +12,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import { NavbarLayout } from "./components/NavbarLayout";
+import { MainLayout } from "./components/MainLayout";
 import { Root } from "./components/Root";
 import { Course } from "./pages/courses/course/Course";
 import { Courses } from "./pages/courses/Courses";
@@ -27,22 +27,24 @@ import { ShoppingCart } from "./pages/shopping-cart/ShoppingCart";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
-      <Route path="login" element={<Login />} />
-      <Route path="registration" element={<Registration />} />
-      <Route path="forgot-password" element={<ForgotPassword />} />
+      <Route element={<MainLayout />}>
+        <Route path="login" element={<Login />} />
+        <Route path="registration" element={<Registration />} />
+        <Route path="forgot-password" element={<ForgotPassword />} />
 
-      <Route element={<NavbarLayout />}>
-        <Route path="courses">
-          <Route index element={<Courses />} />
-          <Route path=":id" element={<Course />} />
+        <Route path="/app">
+          <Route path="courses">
+            <Route index element={<Courses />} />
+            <Route path=":id" element={<Course />} />
+          </Route>
+
+          <Route path="shopping-cart">
+            <Route index element={<ShoppingCart />} />
+            <Route path="payment" element={<Payment />} />
+          </Route>
+
+          <Route path="history" element={<History />} />
         </Route>
-
-        <Route path="shopping-cart">
-          <Route index element={<ShoppingCart />} />
-          <Route path="payment" element={<Payment />} />
-        </Route>
-
-        <Route path="history" element={<History />} />
       </Route>
     </Route>
   )

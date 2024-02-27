@@ -222,7 +222,7 @@ export function Registration() {
         </InputGroup>
       </Flex>
 
-      <ReactRouterLink to="/courses">
+      <ReactRouterLink to="/app/courses">
         <Button variant="primary">Register</Button>
       </ReactRouterLink>
     </Flex>
