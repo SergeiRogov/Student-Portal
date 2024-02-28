@@ -1,10 +1,10 @@
 import {
   Box,
   Flex,
+  Spacer,
   Tab,
   TabList,
   Tabs,
-  Text,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
@@ -12,9 +12,9 @@ import { Link } from "react-router-dom";
 export function Navbar() {
   const username = "John Doe";
   return (
-    <Box>
-      <Flex justify="space-between" alignItems="center" p="4">
-        <Tabs variant="enclosed" width="auto" mx="auto">
+    <Flex as="nav" justify="space-between" alignItems="center" gap="10px" p="4">
+      <Box>
+        <Tabs variant="enclosed" width="auto">
           <TabList>
             <Link to="app/courses">
               <Tab
@@ -48,8 +48,9 @@ export function Navbar() {
             </Link>
           </TabList>
         </Tabs>
-        <Text ml="4">{username}</Text>
-      </Flex>
-    </Box>
+      </Box>
+      <Spacer />
+      <Box>{username}</Box>
+    </Flex>
   );
 }
