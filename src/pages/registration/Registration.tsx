@@ -228,6 +228,4 @@ export function Registration() {
     </Flex>
   );
 }
-function mode(arg0: string, arg1: string) {
-  throw new Error("Function not implemented.");
-}
+
