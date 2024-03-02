@@ -1,7 +1,6 @@
 import {
   Box,
   Flex,
-  Spacer,
   Tab,
   TabList,
   Tabs,
@@ -10,7 +9,7 @@ import {
 import { Link } from "react-router-dom";
 
 export function Navbar() {
-  const username = "John Doe";
+  const username = "sergeirogov";
   return (
     <Flex as="nav" justify="space-between" alignItems="center" gap="10px" p="4">
       <Box>
@@ -49,7 +48,6 @@ export function Navbar() {
           </TabList>
         </Tabs>
       </Box>
-      <Spacer />
       <Box>{username}</Box>
     </Flex>
   );

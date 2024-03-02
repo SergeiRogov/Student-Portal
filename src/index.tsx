@@ -13,6 +13,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { Root } from "./components/Root";
+import { courses } from "./data/courses";
 import { Course } from "./pages/courses/course/Course";
 import { Courses } from "./pages/courses/Courses";
 import ErrorPage from "./pages/error-page/ErrorPage";
@@ -32,8 +33,8 @@ const router = createBrowserRouter(
 
       <Route path="/app">
         <Route path="courses">
-          <Route index element={<Courses />} />
-          <Route path=":id" element={<Course />} />
+          <Route index element={<Courses courses={courses} />} />
+          <Route path=":id" element={<Course courses={courses} />} />
         </Route>
 
         <Route path="shopping-cart">

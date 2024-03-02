@@ -7,80 +7,38 @@ import {
   Text,
 } from "@chakra-ui/react";
 
+import { Link } from "react-router-dom";
+
 interface Course {
   id: number;
   title: string;
   description: string;
   lecturer: string;
+  details: string;
 }
 
-const courses = [
-  {
-    id: 1,
-    title: "Machine Learning",
-    description: "ML course",
-    lecturer: "Dr Parker",
-  },
-  {
-    id: 2,
-    title: "Machine Learning",
-    description: "ML course",
-    lecturer: "Dr Parker",
-  },
-  {
-    id: 3,
-    title: "Machine Learning",
-    description: "ML course",
-    lecturer: "Dr Parker",
-  },
-  {
-    id: 4,
-    title: "Machine Learning",
-    description: "ML course",
-    lecturer: "Dr Parker",
-  },
-  {
-    id: 5,
-    title: "Machine Learning",
-    description: "ML course",
-    lecturer: "Dr Parker",
-  },
-  {
-    id: 3,
-    title: "Machine Learning",
-    description: "ML course",
-    lecturer: "Dr Parker",
-  },
-  {
-    id: 4,
-    title: "Machine Learning",
-    description: "ML course",
-    lecturer: "Dr Parker",
-  },
-  {
-    id: 5,
-    title: "Machine Learning",
-    description: "ML course",
-    lecturer: "Dr Parker",
-  },
-];
+interface CoursesProps {
+  courses: Course[]; // Assuming Course is your data type for each course
+}
 
-export function Courses() {
+export const Courses: React.FC<CoursesProps> = ({ courses }) => {
   return (
     <SimpleGrid p="10px" spacing={8} minChildWidth="300px">
       {courses.map((course: Course) => (
-        <Card key={course.id}>
-          <CardHeader>
-            <Text>{course.title}</Text>
-          </CardHeader>
-          <CardBody>
-            <Text>{course.description}</Text>
-          </CardBody>
-          <CardFooter>
-            <Text>{course.lecturer}</Text>
-          </CardFooter>
-        </Card>
+        <Link key={course.id} to={`/app/courses/${course.id}`}>
+          <Card key={course.id}>
+            <CardHeader>
+              <Text>{course.title}</Text>
+            </CardHeader>
+            <CardBody>
+              <Text>{course.description}</Text>
+            </CardBody>
+            <CardFooter>
+              <Text>{course.lecturer}</Text>
+            </CardFooter>
+          </Card>
+        </Link>
       ))}
     </SimpleGrid>
   );
-}
+};
