@@ -32,7 +32,6 @@ interface CoursesProps {
 }
 
 const handleAddToCart = (course: Course) => {
-  // Handle adding course to cart
   console.log("Added to cart:", course);
 };
 

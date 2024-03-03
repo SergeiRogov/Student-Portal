@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Text } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 
 interface Course {
@@ -12,6 +12,10 @@ interface Course {
 export interface ICourseProps {
   courses: Course[];
 }
+
+const handleAddToCart = (course: Course) => {
+  console.log("Added to cart:", course);
+};
 
 export function Course(props: ICourseProps) {
   const { id } = useParams();
@@ -41,6 +45,11 @@ export function Course(props: ICourseProps) {
       <Text>
         <strong>Details:</strong> {course.details}
       </Text>
+      <Flex justify="flex-end" mt="auto">
+        <Button size="sm" maxW="100px" onClick={() => handleAddToCart(course)}>
+          Add to cart
+        </Button>
+      </Flex>
     </Box>
   );
 }
