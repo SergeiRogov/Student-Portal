@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Flex,
   Tab,
   TabList,
@@ -49,6 +50,7 @@ export function Navbar() {
         </Tabs>
       </Box>
       <Box>{username}</Box>
+      <Button width="85px">Sign out</Button>
     </Flex>
   );
 }
