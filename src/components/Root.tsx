@@ -6,6 +6,7 @@ import { Navbar } from "./Navbar";
 export const Root = () => {
   const location = useLocation();
   const showNavbar = location.pathname.includes("/app");
+
   return (
     <Grid templateRows="auto 1fr" gap={4}>
       <GridItem>

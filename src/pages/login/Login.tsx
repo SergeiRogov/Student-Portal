@@ -1,105 +1,117 @@
 import { AtSignIcon, UnlockIcon } from "@chakra-ui/icons";
 import {
+  Box,
   Button,
   Flex,
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
   Input,
   InputGroup,
-  InputLeftElement,
+  InputRightElement,
   Link as ChakraLink,
   Text,
   useColorModeValue,
+  VStack,
 } from "@chakra-ui/react";
-import { useFormik } from "formik";
-import { Link as ReactRouterLink } from "react-router-dom";
+import { Field, Formik } from "formik";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 
 export function Login() {
-  const formik = useFormik({
-    initialValues: {
-      username: "",
-      password: "",
-    },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+  const navigate = useNavigate();
+
+  const currentColor = useColorModeValue("primary.light", "primary.dark");
 
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <Flex
-        flexDirection="column"
-        justifyContent="center" // Center vertically
-        alignItems="center" // Center horizontally
-        height="100vh" // Set the height to the full viewport height
-      >
-        <Text
-          mb={4}
-          fontWeight="extrabold"
-          fontSize="25"
-          color={useColorModeValue("primary.light", "primary.dark")}
+    <Flex
+      flexDirection="column"
+      justifyContent="center" // Center vertically
+      alignItems="center" // Center horizontally
+      height="100vh" // Set the height to the full viewport height
+      align="center"
+      justify="center"
+      h="100vh"
+    >
+      <Box p={6} rounded="md">
+        <Formik
+          initialValues={{
+            username: "",
+            password: "",
+          }}
+          validate={(values) => {
+            const errors: any = {};
+
+            if (!values.username) {
+              errors.username = "Username is required";
+            }
+
+            if (!values.password) {
+              errors.password = "Password is required";
+            } else if (values.password.length < 6) {
+              errors.password = "Password must be at least 6 characters";
+            }
+
+            return errors;
+          }}
+          onSubmit={(values) => {
+            navigate("/app/courses");
+          }}
         >
-          Login
-        </Text>
-
-        <Flex alignItems="center">
-          <InputGroup width="250px">
-            <InputLeftElement pointerEvents="none">
-              <AtSignIcon
-                color={useColorModeValue("primary.light", "primary.dark")}
-              />
-            </InputLeftElement>
-            <Input
-              name="username"
-              placeholder="username"
-              width="100%" // Use 100% width for the Input
-              mb={4}
-              minHeight="40px"
-              onChange={formik.handleChange}
-              value={formik.values.username}
-            />
-          </InputGroup>
+          {({ handleSubmit, errors, touched }) => (
+            <form onSubmit={handleSubmit}>
+              <VStack spacing={4} align="flex-start">
+                <FormControl isInvalid={!!errors.username && touched.username}>
+                  <FormLabel htmlFor="email">Username</FormLabel>
+                  <InputGroup width="250px">
+                    <Field
+                      as={Input}
+                      id="username"
+                      name="username"
+                      placeholder="username"
+                      variant="filled"
+                    />
+                    <InputRightElement pointerEvents="none">
+                      <AtSignIcon color={currentColor} />
+                    </InputRightElement>
+                  </InputGroup>
+                  <FormErrorMessage>{errors.username}</FormErrorMessage>
+                </FormControl>
+                <FormControl isInvalid={!!errors.password && touched.password}>
+                  <FormLabel htmlFor="password">Password</FormLabel>
+                  <InputGroup width="250px">
+                    <Field
+                      as={Input}
+                      id="password"
+                      name="password"
+                      type="password"
+                      placeholder="password"
+                      variant="filled"
+                    />
+                    <InputRightElement pointerEvents="none">
+                      <UnlockIcon color={currentColor} />
+                    </InputRightElement>
+                  </InputGroup>
+                  <FormErrorMessage>{errors.password}</FormErrorMessage>
+                </FormControl>
+                <Button type="submit" width="250px">
+                  Sign in
+                </Button>
+              </VStack>
+            </form>
+          )}
+        </Formik>
+        <Flex flexDirection="column" alignItems="center">
+          <ChakraLink as={RouterLink} to="/forgot-password">
+            forgot password
+          </ChakraLink>
+          <Text mt={4} mb={6}>
+            or
+          </Text>
+          <ChakraLink as={RouterLink} to="/registration">
+            <Button variant="primary">Create new account</Button>
+          </ChakraLink>
         </Flex>
-
-        <Flex alignItems="center">
-          <InputGroup width="250px">
-            <InputLeftElement pointerEvents="none">
-              <UnlockIcon
-                color={useColorModeValue("primary.light", "primary.dark")}
-              />
-            </InputLeftElement>
-            <Input
-              type="password"
-              name="password"
-              placeholder="password"
-              width="250px" // Set the width of the input field
-              mb={4} // Adds margin-bottom for spacing
-              minHeight="40px"
-              onChange={formik.handleChange}
-              value={formik.values.password}
-            />
-          </InputGroup>
-        </Flex>
-
-        {/* <ReactRouterLink to="/app/courses"> */}
-        <Button variant="primary" type="submit">
-          Sign in
-        </Button>
-        {/* </ReactRouterLink> */}
-
-        <ChakraLink
-          as={ReactRouterLink}
-          to="/forgot-password"
-          mb={4}
-          fontSize="15"
-        >
-          forgot password
-        </ChakraLink>
-
-        <Text mb={4}>or</Text>
-
-        <ReactRouterLink to="/registration">
-          <Button variant="primary">Create new account</Button>
-        </ReactRouterLink>
-      </Flex>
-    </form>
+      </Box>
+    </Flex>
   );
 }
