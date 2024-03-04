@@ -59,7 +59,15 @@ export function Login() {
         >
           {({ handleSubmit, errors, touched }) => (
             <form onSubmit={handleSubmit}>
-              <VStack spacing={4} align="flex-start">
+              <VStack spacing={4}>
+                <Text
+                  mb={4}
+                  fontWeight="extrabold"
+                  fontSize="25"
+                  color={currentColor}
+                >
+                  Login
+                </Text>
                 <FormControl isInvalid={!!errors.username && touched.username}>
                   <FormLabel htmlFor="email">Username</FormLabel>
                   <InputGroup width="250px">
