@@ -12,6 +12,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Root } from "./components/Root";
 import { courses } from "./data/courses";
 import { Course } from "./pages/courses/course/Course";
@@ -31,7 +32,7 @@ const router = createBrowserRouter(
       <Route path="registration" element={<Registration />} />
       <Route path="forgot-password" element={<ForgotPassword />} />
 
-      <Route path="/app">
+      <Route path="/app" element={<ProtectedRoute user={{}} />}>
         <Route path="courses">
           <Route index element={<Courses courses={courses} />} />
           <Route path=":id" element={<Course courses={courses} />} />
