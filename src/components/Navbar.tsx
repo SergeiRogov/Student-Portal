@@ -8,9 +8,11 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import { useUserStore } from "../data/usersStore";
 
 export function Navbar() {
   const username = "sergeirogov";
+  const logoutUser = useUserStore((state) => state.logoutUser);
   return (
     <Flex as="nav" justify="space-between" alignItems="center" gap="10px" p="4">
       <Box>
@@ -50,7 +52,7 @@ export function Navbar() {
         </Tabs>
       </Box>
       <Box>{username}</Box>
-      <Button width="85px">Sign out</Button>
+      <Button width="85px" onClick={(logoutUser)}>Sign out</Button>
     </Flex>
   );
 }

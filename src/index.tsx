@@ -12,7 +12,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+import { AuthenticationProvider } from "./components/AuthenticationProvider";
 import { Root } from "./components/Root";
 import { courses } from "./data/courses";
 import { Course } from "./pages/courses/course/Course";
@@ -27,12 +27,20 @@ import { ShoppingCart } from "./pages/shopping-cart/ShoppingCart";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
+    <Route
+      path="/"
+      element={
+        <AuthenticationProvider>
+          <Root />
+        </AuthenticationProvider>
+      }
+      errorElement={<ErrorPage />}
+    >
       <Route path="login" element={<Login />} />
       <Route path="registration" element={<Registration />} />
       <Route path="forgot-password" element={<ForgotPassword />} />
 
-      <Route path="/app" element={<ProtectedRoute user={{}} />}>
+      <Route path="/app">
         <Route path="courses">
           <Route index element={<Courses courses={courses} />} />
           <Route path=":id" element={<Course courses={courses} />} />

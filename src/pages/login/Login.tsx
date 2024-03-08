@@ -14,10 +14,9 @@ import {
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
-import axios from "axios";
 import { Field, Formik } from "formik";
-import { useState } from "react";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+import { useUserStore } from "../../data/usersStore";
 
 interface LoginValues {
   username: string;
@@ -25,8 +24,10 @@ interface LoginValues {
 }
 
 export function Login() {
-  const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState("");
+  const [loginUser, errorMessage] = useUserStore((state) => [
+    state.loginUser,
+    state.errorMessage,
+  ]);
 
   const currentColor = useColorModeValue("primary.light", "primary.dark");
 
@@ -62,23 +63,7 @@ export function Login() {
             return errors;
           }}
           onSubmit={(values: LoginValues) => {
-            axios
-              .post("http://localhost:3001/api/login", {
-                values,
-              })
-              .then((response) => {
-                // Successful login
-                console.log(response.data);
-                navigate("/app/courses");
-              })
-              .catch((error) => {
-                if (error.response && error.response.status === 401) {
-                  setErrorMessage("Incorrect username or password");
-                  console.error("Incorrect username or password");
-                } else {
-                  console.error("Login failed:", error);
-                }
-              });
+            loginUser(values);
           }}
         >
           {({ handleSubmit, errors, touched }) => (
