@@ -13,11 +13,13 @@ import {
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { Field, Formik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export function ForgotPassword() {
-  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
+  const [password, setPassword] = useState("");
 
   const currentColor = useColorModeValue("primary.light", "primary.dark");
   return (
@@ -35,46 +37,69 @@ export function ForgotPassword() {
       <Text mb={2}>Don't worry...</Text>
       <Formik
         initialValues={{
-          email: "",
+          username: "",
         }}
         validate={(values) => {
           const errors: any = {};
 
-          if (!values.email) {
-            errors.email = "Email is required";
-          } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
-            errors.email = "Invalid email address";
+          if (!values.username) {
+            errors.email = "Username is required";
           }
-
           return errors;
         }}
         onSubmit={(values) => {
-          navigate("/login");
+          axios
+            .post("http://localhost:3001/api/generateNewPassword", {
+              ...values,
+            })
+            .then((response) => {
+              const responseData = response.data;
+              if (responseData && responseData.generatedPassword) {
+                setPassword(responseData.generatedPassword);
+              } else {
+                setErrorMessage("Something gone wrong...");
+              }
+            })
+            .catch((error) => {
+              if (error.response && error.response.status === 401) {
+                setErrorMessage("User not found");
+              } else {
+                setErrorMessage("Request for a new password failed:" + error);
+              }
+            });
         }}
       >
         {({ handleSubmit, errors, touched }) => (
           <form onSubmit={handleSubmit}>
             <VStack spacing={4} align="flex-start">
-              <FormControl isInvalid={!!errors.email && touched.email}>
-                <FormLabel htmlFor="email">Email</FormLabel>
+              <FormControl isInvalid={!!errors.username && touched.username}>
+                <FormLabel htmlFor="username">Username</FormLabel>
                 <InputGroup width="250px">
                   <Field
                     as={Input}
-                    id="email"
-                    name="email"
-                    placeholder="email"
+                    id="username"
+                    name="username"
+                    placeholder="username"
                     variant="filled"
                   />
                   <InputRightElement pointerEvents="none">
                     <AtSignIcon color={currentColor} />
                   </InputRightElement>
                 </InputGroup>
-                <FormErrorMessage>{errors.email}</FormErrorMessage>
+                <FormErrorMessage>{errors.username}</FormErrorMessage>
               </FormControl>
+
+              {errorMessage && <Text color="red">{errorMessage}</Text>}
 
               <Button type="submit" width="250px">
                 Request new password
               </Button>
+
+              {password && (
+                <Text mt={4} color="green.500">
+                  Generated Password: {password}
+                </Text>
+              )}
             </VStack>
           </form>
         )}
