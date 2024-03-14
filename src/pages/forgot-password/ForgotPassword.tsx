@@ -43,7 +43,7 @@ export function ForgotPassword() {
           const errors: any = {};
 
           if (!values.username) {
-            errors.email = "Username is required";
+            errors.username = "Username is required";
           }
           return errors;
         }}
