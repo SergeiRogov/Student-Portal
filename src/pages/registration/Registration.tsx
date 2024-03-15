@@ -33,6 +33,7 @@ export function Registration() {
         initialValues={{
           firstName: "",
           surname: "",
+          gender: "",
           email: "",
           dateOfBirth: "",
           nationality: "",
@@ -50,6 +51,48 @@ export function Registration() {
         }}
         validate={(values) => {
           const errors: any = {};
+
+          if (!values.firstName) {
+            errors.firstName = "First name is required";
+          }
+
+          if (!values.surname) {
+            errors.surname = "Surname is required";
+          }
+
+          if (!values.gender) {
+            errors.gender = "Gender is required";
+          }
+
+          if (!values.email) {
+            errors.email = "Email is required";
+          }
+
+          if (!values.telephone) {
+            errors.telephone = "Telephone is required";
+          }
+
+          if (!values.country) {
+            errors.country = "Country is required";
+          }
+
+          if (!values.username) {
+            errors.username = "Username is required";
+          }
+
+          if (!values.password) {
+            errors.password = "Password is required";
+          } else if (values.password.length < 6) {
+            errors.password = "Password must be at least 6 characters";
+          }
+
+          if (!values.confirmPassword) {
+            errors.confirmPassword = "Password is required";
+          } else if (values.confirmPassword !== values.password) {
+            errors.confirmPassword = "Passwords don't match";
+          } else if (values.confirmPassword.length < 6) {
+            errors.confirmPassword = "Password must be at least 6 characters";
+          }
 
           return errors;
         }}
@@ -106,12 +149,37 @@ export function Registration() {
                 </FormControl>
               </Flex>
 
-              <RadioGroup color={currentColor}>
-                <Stack spacing={10} mb={4} direction="row">
-                  <Radio value="1">male</Radio>
-                  <Radio value="2">female</Radio>
-                </Stack>
-              </RadioGroup>
+              <Flex>
+                <FormControl
+                  isInvalid={!!errors.gender && touched.gender}
+                  width="250px"
+                >
+                  <FormLabel htmlFor="gender">Gender</FormLabel>
+                  <Field name="gender">
+                    {({ field, form }: { field: any; form: any }) => (
+                      <RadioGroup
+                        color={currentColor}
+                        value={field.value}
+                        onChange={(value) =>
+                          form.setFieldValue(field.name, value)
+                        }
+                        width="250px"
+                      >
+                        <Stack
+                          spacing={4}
+                          direction="row"
+                          justifyContent="space-around"
+                        >
+                          <Radio value="male">Male</Radio>
+
+                          <Radio value="female">Female</Radio>
+                        </Stack>
+                      </RadioGroup>
+                    )}
+                  </Field>
+                  <FormErrorMessage>{errors.gender}</FormErrorMessage>
+                </FormControl>
+              </Flex>
 
               <Flex>
                 <FormControl isInvalid={!!errors.email && touched.email}>
@@ -121,11 +189,12 @@ export function Registration() {
                       as={Input}
                       id="email"
                       name="email"
+                      type="email"
                       placeholder="email"
                       variant="filled"
                     />
                   </InputGroup>
-                  <FormErrorMessage>{errors.telephone}</FormErrorMessage>
+                  <FormErrorMessage>{errors.email}</FormErrorMessage>
                 </FormControl>
               </Flex>
 
@@ -360,7 +429,7 @@ export function Registration() {
                       as={Input}
                       id="confirmPassword"
                       name="confirmPassword"
-                      type="confirmPassword"
+                      type="password"
                       placeholder="confirm password"
                       variant="filled"
                     />
