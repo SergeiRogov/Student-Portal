@@ -24,7 +24,7 @@ export function ForgotPassword() {
   const currentColor = useColorModeValue("primary.light", "primary.dark");
   return (
     <Box
-      id="error-page"
+      id="forgot-password"
       display="flex"
       flexDirection="column"
       alignItems="center"
@@ -57,7 +57,7 @@ export function ForgotPassword() {
               if (responseData && responseData.generatedPassword) {
                 setPassword(responseData.generatedPassword);
               } else {
-                setErrorMessage("Something gone wrong...");
+                setErrorMessage("Something went wrong...");
               }
             })
             .catch((error) => {

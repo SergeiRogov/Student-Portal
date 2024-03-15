@@ -15,11 +15,14 @@ import {
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { Field, Formik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useUserStore } from "../../data/usersStore";
 
 export function Registration() {
-  const navigate = useNavigate();
+  const [loginUser] = useUserStore((state) => [state.loginUser]);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const currentColor = useColorModeValue("primary.light", "primary.dark");
 
@@ -97,7 +100,23 @@ export function Registration() {
           return errors;
         }}
         onSubmit={(values) => {
-          navigate("/app/courses");
+          axios
+            .post("http://localhost:3001/api/registration", {
+              ...values,
+            })
+            .then(() => {
+              loginUser({
+                username: values.username,
+                password: values.password,
+              });
+            })
+            .catch((error) => {
+              if (error.response && error.response.status === 401) {
+                setErrorMessage("Username already exists");
+              } else {
+                setErrorMessage("Error:" + error);
+              }
+            });
         }}
       >
         {({ handleSubmit, errors, touched }) => (
@@ -444,6 +463,8 @@ export function Registration() {
               <Button type="submit" width="250px">
                 Register
               </Button>
+
+              {errorMessage && <Text color="red">{errorMessage}</Text>}
             </VStack>
           </form>
         )}
