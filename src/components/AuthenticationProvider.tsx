@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUserStore } from "../data/usersStore";
+import { useUsersStore } from "../data/usersStore";
 
 export function AuthenticationProvider(props: any) {
   const navigate = useNavigate();
-  const loggedIn = useUserStore((state) => state.loggedIn);
+  const loggedIn = useUsersStore((state) => state.loggedIn);
 
   useEffect(() => {
     console.log(loggedIn);

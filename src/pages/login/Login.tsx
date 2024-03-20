@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { Field, Formik } from "formik";
 import { Link as RouterLink } from "react-router-dom";
-import { useUserStore } from "../../data/usersStore";
+import { useUsersStore } from "../../data/usersStore";
 
 interface LoginValues {
   username: string;
@@ -24,7 +24,7 @@ interface LoginValues {
 }
 
 export function Login() {
-  const [loginUser, errorMessage] = useUserStore((state) => [
+  const [loginUser, errorMessage] = useUsersStore((state) => [
     state.loginUser,
     state.errorMessage,
   ]);

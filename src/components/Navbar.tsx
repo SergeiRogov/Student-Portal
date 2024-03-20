@@ -8,11 +8,11 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { useUserStore } from "../data/usersStore";
+import { useUsersStore } from "../data/usersStore";
 
 export function Navbar() {
   const username = "sergeirogov";
-  const logoutUser = useUserStore((state) => state.logoutUser);
+  const logoutUser = useUsersStore((state) => state.logoutUser);
   return (
     <Flex as="nav" justify="space-between" alignItems="center" gap="10px" p="4">
       <Box>

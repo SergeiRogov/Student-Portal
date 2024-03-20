@@ -6,14 +6,14 @@ interface LoginValues {
   password: string;
 }
 
-export interface IUserStore {
+export interface IUsersStore {
   loggedIn: boolean;
   errorMessage: string;
   loginUser: (values: LoginValues) => void;
   logoutUser: () => void;
 }
 
-export const useUserStore = create<IUserStore>((set) => ({
+export const useUsersStore = create<IUsersStore>((set) => ({
   loggedIn: false,
   errorMessage: "",
   loginUser: (values: LoginValues) => {

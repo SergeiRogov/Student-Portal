@@ -18,10 +18,10 @@ import {
 import axios from "axios";
 import { Field, Formik } from "formik";
 import { useState } from "react";
-import { useUserStore } from "../../data/usersStore";
+import { useUsersStore } from "../../data/usersStore";
 
 export function Registration() {
-  const [loginUser] = useUserStore((state) => [state.loginUser]);
+  const [loginUser] = useUsersStore((state) => [state.loginUser]);
   const [errorMessage, setErrorMessage] = useState("");
 
   const currentColor = useColorModeValue("primary.light", "primary.dark");

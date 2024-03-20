@@ -10,13 +10,13 @@ interface ICourse {
   price: number;
 }
 
-export interface ICourseStore {
+export interface ICoursesStore {
   courses: ICourse[];
   errorMessage: string;
   getCourses: () => void;
 }
 
-export const useUserStore = create<ICourseStore>((set) => ({
+export const useCoursesStore = create<ICoursesStore>((set) => ({
   courses: [],
   errorMessage: "",
   getCourses: () => {
