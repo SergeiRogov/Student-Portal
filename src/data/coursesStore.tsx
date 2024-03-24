@@ -15,7 +15,6 @@ export interface ICoursesStore {
   errorMessage: string;
   getCourses: () => void;
 }
-// &f1+p@3cG-XjXw
 
 export const useCoursesStore = create<ICoursesStore>((set, get) => ({
   courses: [],
