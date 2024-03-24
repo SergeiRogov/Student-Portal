@@ -79,7 +79,7 @@ export function Login() {
                 </Text>
                 {/* todo: get rid of input field text overlapping wit icon */}
                 <FormControl isInvalid={!!errors.username && touched.username}>
-                  <FormLabel htmlFor="email">Username</FormLabel>
+                  <FormLabel htmlFor="username">Username</FormLabel>
                   <InputGroup width="250px">
                     <Field
                       as={Input}
