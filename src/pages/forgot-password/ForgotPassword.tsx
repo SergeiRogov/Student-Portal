@@ -53,7 +53,7 @@ export function ForgotPassword() {
               ...values,
             })
             .then((response) => {
-              const responseData = response.data;
+              const responseData = response.data.data;
               if (responseData && responseData.generatedPassword) {
                 setPassword(responseData.generatedPassword);
               } else {
