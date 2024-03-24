@@ -42,7 +42,7 @@ const router = createBrowserRouter(
 
       <Route path="/app">
         <Route path="courses">
-          <Route index element={<Courses courses={courses} />} />
+          <Route index element={<Courses />} />
           <Route path=":id" element={<Course courses={courses} />} />
         </Route>
 

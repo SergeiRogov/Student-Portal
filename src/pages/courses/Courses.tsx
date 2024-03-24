@@ -18,24 +18,26 @@ import {
 } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
+import { useCoursesStore } from "../../data/coursesStore";
 
-interface Course {
+interface ICourse {
   id: number;
   title: string;
   description: string;
   lecturer: string;
   details: string;
+  price: number;
 }
 
-interface CoursesProps {
-  courses: Course[];
-}
-
-const handleAddToCart = (course: Course) => {
+const handleAddToCart = (course: ICourse) => {
   console.log("Added to cart:", course);
 };
 
-export const Courses: React.FC<CoursesProps> = ({ courses }) => {
+export const Courses = () => {
+  const [courses, errorMessage] = useCoursesStore((state) => [
+    state.courses,
+    state.errorMessage,
+  ]);
   return (
     <Box p={4}>
       <Flex alignItems="center" mb={4}>
@@ -62,14 +64,15 @@ export const Courses: React.FC<CoursesProps> = ({ courses }) => {
         </Select>
       </Flex>
       <SimpleGrid p="10px" spacing={8} minChildWidth="300px">
-        {courses.map((course: Course) => (
+        {errorMessage && <Text color="red">{errorMessage}</Text>}
+        {courses?.map((course: ICourse) => (
           <Card key={course.id}>
             <Link key={course.id} to={`/app/courses/${course.id}`}>
               <CardHeader>
                 <Heading size="md">{course.title}</Heading>
               </CardHeader>
               <CardBody>
-                <Text>{course.description} </Text>
+                <Text>{course.description}</Text>
                 <Text>{course.lecturer}</Text>
               </CardBody>
             </Link>
