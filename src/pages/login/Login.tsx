@@ -86,6 +86,7 @@ export function Login() {
                       id="username"
                       name="username"
                       placeholder="username"
+                      autoComplete="username"
                       variant="filled"
                     />
                     <InputRightElement pointerEvents="none">
@@ -103,6 +104,7 @@ export function Login() {
                       name="password"
                       type="password"
                       placeholder="password"
+                      autoComplete="current-password"
                       variant="filled"
                     />
                     <InputRightElement pointerEvents="none">

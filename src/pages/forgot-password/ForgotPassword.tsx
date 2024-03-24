@@ -80,6 +80,7 @@ export function ForgotPassword() {
                     id="username"
                     name="username"
                     placeholder="username"
+                    autoComplete="username"
                     variant="filled"
                   />
                   <InputRightElement pointerEvents="none">

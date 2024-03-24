@@ -144,7 +144,7 @@ export function Registration() {
                       as={Input}
                       id="firstName"
                       name="firstName"
-                      placeholder="firstName"
+                      placeholder="first name"
                       variant="filled"
                     />
                   </InputGroup>
@@ -174,7 +174,7 @@ export function Registration() {
                   width="250px"
                 >
                   <FormLabel htmlFor="gender">Gender</FormLabel>
-                  <Field name="gender">
+                  <Field id="gender" name="gender">
                     {({ field, form }: { field: any; form: any }) => (
                       <RadioGroup
                         color={currentColor}
@@ -190,7 +190,6 @@ export function Registration() {
                           justifyContent="space-around"
                         >
                           <Radio value="male">Male</Radio>
-
                           <Radio value="female">Female</Radio>
                         </Stack>
                       </RadioGroup>
@@ -210,6 +209,7 @@ export function Registration() {
                       name="email"
                       type="email"
                       placeholder="email"
+                      autoComplete="email"
                       variant="filled"
                     />
                   </InputGroup>
@@ -227,7 +227,7 @@ export function Registration() {
                       as={Input}
                       id="dateOfBirth"
                       name="dateOfBirth"
-                      placeholder="dateOfBirth"
+                      placeholder="date of birth"
                       variant="filled"
                     />
                   </InputGroup>
@@ -306,6 +306,7 @@ export function Registration() {
                       id="country"
                       name="country"
                       placeholder="country"
+                      autoComplete="on"
                       variant="filled"
                     />
                   </InputGroup>
@@ -322,6 +323,7 @@ export function Registration() {
                       id="region"
                       name="region"
                       placeholder="region"
+                      autoComplete="on"
                       variant="filled"
                     />
                   </InputGroup>
@@ -405,6 +407,7 @@ export function Registration() {
                       id="username"
                       name="username"
                       placeholder="username"
+                      autoComplete="username"
                       variant="filled"
                     />
                     <InputRightElement pointerEvents="none">
@@ -424,6 +427,7 @@ export function Registration() {
                       name="password"
                       type="password"
                       placeholder="password"
+                      autoComplete="new-password"
                       variant="filled"
                     />
                     <InputRightElement pointerEvents="none">
@@ -450,6 +454,7 @@ export function Registration() {
                       name="confirmPassword"
                       type="password"
                       placeholder="confirm password"
+                      autoComplete="new-password"
                       variant="filled"
                     />
                     <InputRightElement pointerEvents="none">
