@@ -9,46 +9,27 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Link as ReactRouterLink } from "react-router-dom";
+import { useCartStore } from "../../data/cartStore";
 
-const courses = [
-  {
-    id: 1,
-    title: "Machine Learning",
-    description: "ML course",
-    lecturer: "Dr Parker",
-  },
-  {
-    id: 2,
-    title: "Machine Learning",
-    description: "ML course",
-    lecturer: "Dr Parker",
-  },
-  {
-    id: 3,
-    title: "Machine Learning",
-    description: "ML course",
-    lecturer: "Dr Parker",
-  },
-  {
-    id: 2,
-    title: "Machine Learning",
-    description: "ML course",
-    lecturer: "Dr Parker",
-  },
-];
-
-interface Course {
+interface ICourse {
   id: number;
   title: string;
   description: string;
   lecturer: string;
+  details: string;
+  price: number;
 }
 
 export function ShoppingCart() {
+  const [coursesCart, errorMessage] = useCartStore((state) => [
+    state.coursesCart,
+    state.errorMessage,
+  ]);
   return (
     <>
       <SimpleGrid p="10px" spacing={8} minChildWidth="300px">
-        {courses.map((course: Course) => (
+        {errorMessage && <Text color="red">{errorMessage}</Text>}
+        {coursesCart?.map((course: ICourse) => (
           <Card key={course.id}>
             <CardHeader>
               <Text>{course.title}</Text>

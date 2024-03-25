@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
+import { useCartStore } from "../../data/cartStore";
 import { useCoursesStore } from "../../data/coursesStore";
 
 interface ICourse {
@@ -29,21 +30,18 @@ interface ICourse {
   price: number;
 }
 
-const handleAddToCart = (course: ICourse) => {
-  console.log("Added to cart:", course);
-};
-
 export const Courses = () => {
   const [courses, errorMessage] = useCoursesStore((state) => [
     state.courses,
     state.errorMessage,
   ]);
+  const addToCart = useCartStore((state) => state.addToCart);
   return (
     <Box p={4}>
       <Flex alignItems="center" mb={4}>
         <InputGroup width="200px">
           <Input
-            name="course search"
+            name="courseSearch"
             placeholder="Search courses"
             width="100%"
             minHeight="40px"
@@ -77,11 +75,7 @@ export const Courses = () => {
               </CardBody>
             </Link>
             <CardFooter display="flex" justifyContent="flex-end" p={2}>
-              <Button
-                size="sm"
-                maxW="100px"
-                onClick={() => handleAddToCart(course)}
-              >
+              <Button size="sm" maxW="100px" onClick={() => addToCart(course)}>
                 Add to cart
               </Button>
             </CardFooter>

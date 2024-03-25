@@ -32,7 +32,7 @@ export const useCartStore = create<ICartStore>((set, get) => ({
         }
       });
   },
-  addToCart: (courseToAdd) => {
+  addToCart: (courseToAdd: ICourse) => {
     axios
       .post("http://localhost:3001/api/cart", courseToAdd)
       .then(() => {

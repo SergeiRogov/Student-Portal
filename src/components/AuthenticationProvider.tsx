@@ -19,7 +19,7 @@ export function AuthenticationProvider(props: any) {
       getCart();
       navigate("/app/courses");
     }
-  }, [loggedIn, navigate, getCourses]);
+  }, [loggedIn, navigate, getCourses, getCart]);
 
   //todo: replace null with a page "You are not allowed to enter this page..."
 
