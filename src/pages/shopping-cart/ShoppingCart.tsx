@@ -21,15 +21,17 @@ interface ICourse {
 }
 
 export function ShoppingCart() {
-  const [coursesCart, errorMessage] = useCartStore((state) => [
-    state.coursesCart,
+  const [cartCourses, clearCart, errorMessage] = useCartStore((state) => [
+    state.cartCourses,
+    state.clearCart,
     state.errorMessage,
   ]);
+
   return (
     <>
       <SimpleGrid p="10px" spacing={8} minChildWidth="300px">
-        {errorMessage && <Text color="red">{errorMessage}</Text>}
-        {coursesCart?.map((course: ICourse) => (
+        {cartCourses.length === 0 && <Text color="red">{errorMessage}</Text>}
+        {cartCourses?.map((course: ICourse) => (
           <Card key={course.id}>
             <CardHeader>
               <Text>{course.title}</Text>
@@ -44,11 +46,23 @@ export function ShoppingCart() {
         ))}
       </SimpleGrid>
       <Flex justify="center">
-        <Flex justify="flex-end" width="100%">
-          <ReactRouterLink to="/app/shopping-cart/payment">
-            <Button variant="primary">Purchase</Button>
-          </ReactRouterLink>
-        </Flex>
+        {cartCourses.length > 0 && (
+          <Button
+            variant="primary"
+            onClick={() => {
+              clearCart();
+            }}
+          >
+            Clear cart
+          </Button>
+        )}
+        {cartCourses.length > 0 && (
+          <Flex justify="flex-end" width="100%">
+            <ReactRouterLink to="/app/shopping-cart/payment">
+              <Button variant="primary">Purchase</Button>
+            </ReactRouterLink>
+          </Flex>
+        )}
       </Flex>
     </>
   );

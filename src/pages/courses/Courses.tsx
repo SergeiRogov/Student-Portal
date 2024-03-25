@@ -35,7 +35,24 @@ export const Courses = () => {
     state.courses,
     state.errorMessage,
   ]);
-  const addToCart = useCartStore((state) => state.addToCart);
+
+  const [cartCourses, addToCart, removeFromCart] = useCartStore((state) => [
+    state.cartCourses,
+    state.addToCart,
+    state.removeFromCart,
+  ]);
+
+  const isCourseInCart = (courseID: number) =>
+    cartCourses.some((course) => course.id === courseID);
+
+  const handleToggleCart = (course: ICourse) => {
+    if (isCourseInCart(course.id)) {
+      removeFromCart(course.id);
+    } else {
+      addToCart(course);
+    }
+  };
+
   return (
     <Box p={4}>
       <Flex alignItems="center" mb={4}>
@@ -75,8 +92,12 @@ export const Courses = () => {
               </CardBody>
             </Link>
             <CardFooter display="flex" justifyContent="flex-end" p={2}>
-              <Button size="sm" maxW="100px" onClick={() => addToCart(course)}>
-                Add to cart
+              <Button
+                size="sm"
+                maxW="100px"
+                onClick={() => handleToggleCart(course)}
+              >
+                {isCourseInCart(course.id) ? "Remove" : "Add to cart"}
               </Button>
             </CardFooter>
           </Card>
